@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { Header } from '../../shared/components/header/header';
-import { Sidebar } from '../../shared/components/sidebar/sidebar';
-import { Footer } from '../../shared/components/footer/footer';
+import { HeaderComponent } from '../../shared/components/header/header';
+import { SidebarComponent } from '../../shared/components/sidebar/sidebar';
+import { FooterComponent } from '../../shared/components/footer/footer';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
   imports: [
     RouterOutlet,
-    Header,
-    Sidebar,
-    Footer
+    HeaderComponent,
+    SidebarComponent,
+    FooterComponent
   ],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
 })
-export class MainLayout {}
+export class MainLayoutComponent {}

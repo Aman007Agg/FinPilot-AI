@@ -1,34 +1,34 @@
 import { Routes } from '@angular/router';
-import { Login } from './features/auth/login/login';
-import { Register } from './features/auth/register/register';
-import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
+import { LoginComponent } from './features/auth/login/login';
+import { RegisterComponent } from './features/auth/register/register';
+import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password';
 
-import { MainLayout } from './layouts/main-layout/main-layout';
-import { Dashboard } from './features/dashboard/dashboard';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout';
+import { DashboardComponent } from './features/dashboard/dashboard';
 
 export const routes: Routes = [
     {
         path: 'login',
-        component: Login
+        component: LoginComponent
     },
 
     {
         path: 'register',
-        component: Register
+        component: RegisterComponent
     },
 
     {
         path: 'forgot-password',
-        component: ForgotPassword
+        component: ForgotPasswordComponent
     },
 
     {
         path: 'dashboard',
-        component: MainLayout,
+        component: MainLayoutComponent,
         children: [
             {
                 path: '',
-                component: Dashboard
+                component: DashboardComponent
             }
         ]
     },
