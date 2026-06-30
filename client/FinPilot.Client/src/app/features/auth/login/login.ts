@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { AuthService } from '../../../core/services/auth';
+
 import { MATERIAL_MODULES } from '../../../shared/material/material';
 
 @Component({
@@ -17,7 +19,9 @@ import { MATERIAL_MODULES } from '../../../shared/material/material';
 })
 export class LoginComponent {
 
-  private fb = inject(FormBuilder);
+  protected readonly fb = inject(FormBuilder).nonNullable;
+
+  protected readonly authService = inject(AuthService);
 
   hidePassword = true;
 
@@ -42,5 +46,39 @@ export class LoginComponent {
     rememberMe: [false]
 
   });
+
+  login(): void {
+
+  if (this.loginForm.invalid) {
+
+    this.loginForm.markAllAsTouched();
+
+    return;
+
+  }
+
+  const request = this.loginForm.getRawValue();
+
+  this.authService.login(request)
+
+    .subscribe({
+
+      next: (response) => {
+
+        console.log('Login Successful');
+
+        console.log(response);
+
+      },
+
+      error: (error) => {
+
+        console.error(error);
+
+      }
+
+    });
+
+}
 
 }

@@ -8,11 +8,15 @@
 
     <p>Please login to continue</p>
 
-    <form [formGroup]="loginForm">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login()">
 
       <!-- Email -->
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field
+        appearance="outline"
+        class="full-width">
 
         <mat-label>Email</mat-label>
 
@@ -22,11 +26,31 @@
           formControlName="email"
           placeholder="Enter your email">
 
+        @if (loginForm.controls.email.hasError('required') &&
+        loginForm.controls.email.touched) {
+
+          <mat-error>
+            Email is required.
+          </mat-error>
+
+        }
+
+        @if (loginForm.controls.email.hasError('email') &&
+        loginForm.controls.email.touched) {
+
+          <mat-error>
+            Please enter a valid email address.
+          </mat-error>
+
+        }
+
       </mat-form-field>
 
       <!-- Password -->
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field
+        appearance="outline"
+        class="full-width">
 
         <mat-label>Password</mat-label>
 
@@ -43,10 +67,30 @@
           (click)="hidePassword = !hidePassword">
 
           <mat-icon>
+
             {{ hidePassword ? 'visibility_off' : 'visibility' }}
+
           </mat-icon>
 
         </button>
+
+        @if (loginForm.controls.password.hasError('required') &&
+        loginForm.controls.password.touched) {
+
+          <mat-error>
+            Password is required.
+          </mat-error>
+
+        }
+
+        @if (loginForm.controls.password.hasError('minlength') &&
+        loginForm.controls.password.touched) {
+
+          <mat-error>
+            Minimum 6 characters required.
+          </mat-error>
+
+        }
 
       </mat-form-field>
 
@@ -55,11 +99,15 @@
       <div class="remember-row">
 
         <mat-checkbox formControlName="rememberMe">
+
           Remember Me
+
         </mat-checkbox>
 
         <a routerLink="/forgot-password">
+
           Forgot Password?
+
         </a>
 
       </div>
@@ -69,7 +117,9 @@
       <button
         mat-raised-button
         color="primary"
-        class="full-width">
+        class="full-width"
+        type="submit"
+        [disabled]="loginForm.invalid">
 
         Login
 
